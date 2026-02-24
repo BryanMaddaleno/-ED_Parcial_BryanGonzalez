@@ -1,6 +1,9 @@
 package benchmark;
 
 import algorithms.Fibonacci;
+import algorithms.BusquedaLineal;
+import algorithms.Factorial;
+import algorithms.OrdenamientoBurbuja;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -79,7 +82,7 @@ public class Main {
         }
 
         // ---- ANÁLISIS DE DIFERENCIA ----
-        System.out.println("\n  COMPARACIÓN ITERATIVO vs RECURSIVO");
+        System.out.println("\n  COMPARACION ITERATIVO vs RECURSIVO");
         System.out.println("-".repeat(60));
         System.out.printf("%-8s | %-14s | %-14s | %s%n",
                 "n", "Iterativo (ms)", "Recursivo (ms)", "Recursivo / Iterativo");
@@ -91,7 +94,58 @@ public class Main {
             double tRec  = Medidor.medir(() -> Fibonacci.recursivo(fn));
             double factor = (tIter > 0) ? tRec / tIter : 0;
 
-            System.out.printf("n=%-6d | %-14.6f | %-14.6f | %.1fx más lento%n",
+            System.out.printf("n=%-6d | %-14.6f | %-14.6f | %.1fx mas lento%n",
+                    n, tIter, tRec, factor);
+        }
+        /////////////////////FACTORIAL/////////////////
+        //StringBuilder csv = new StringBuilder();
+        csv.append("Algoritmo,Version,n,Resultado,Tiempo_ms\n");
+
+        // ---- Factorial ITERATIVO ----
+        System.out.println("\n  FACTORIAL ITERATIVO  [O(n)]");
+        Medidor.imprimirEncabezado();
+
+        for (int n : TAMANOS) {
+            final int fn = n;
+
+            // Calcular resultado una vez (solo para mostrarlo)
+            long resultado = Factorial.iterativo(fn);
+
+            // Medir solo el algoritmo puro (sin I/O ni inicialización)
+            double tiempoMs = Medidor.medir(() -> Factorial.iterativo(fn));
+
+            Medidor.imprimirFila("Factorial", "Iterativo", n, tiempoMs);
+            csv.append(String.format("Factorial,Iterativo,%d,%d,%.6f%n", n, resultado, tiempoMs));
+        }
+
+        // ---- FACTORIAL RECURSIVO ----
+        System.out.println("\n  FACTORIAL RECURSIVO  [O(2^n)]");
+        Medidor.imprimirEncabezado();
+
+        for (int n : TAMANOS) {
+            final int fn = n;
+
+            long resultado = Factorial.recursivo(fn);
+            double tiempoMs = Medidor.medir(() -> Factorial.recursivo(fn));
+
+            Medidor.imprimirFila("Factorial", "Recursivo", n, tiempoMs);
+            csv.append(String.format("Factorial,Recursivo,%d,%d,%.6f%n", n, resultado, tiempoMs));
+        }
+
+        // ---- ANÁLISIS DE DIFERENCIA ----
+        System.out.println("\n  COMPARACION ITERATIVO vs RECURSIVO");
+        System.out.println("-".repeat(60));
+        System.out.printf("%-8s | %-14s | %-14s | %s%n",
+                "n", "Iterativo (ms)", "Recursivo (ms)", "Recursivo / Iterativo");
+        System.out.println("-".repeat(60));
+
+        for (int n : TAMANOS) {
+            final int fn = n;
+            double tIter = Medidor.medir(() -> Factorial.iterativo(fn));
+            double tRec  = Medidor.medir(() -> Factorial.recursivo(fn));
+            double factor = (tIter > 0) ? tRec / tIter : 0;
+
+            System.out.printf("n=%-6d | %-14.6f | %-14.6f | %.1fx mas lento%n",
                     n, tIter, tRec, factor);
         }
 
@@ -103,14 +157,16 @@ public class Main {
         System.out.println("============================================================");
     }
 
+
+    
+
     // ----------------------------------------------------------------
     // AUXILIARES
     // ----------------------------------------------------------------
     private static void imprimirBanner() {
         System.out.println("============================================================");
-        System.out.println("  ESTRUCTURA DE DATOS — BENCHMARK FIBONACCI");
+        System.out.println("  ESTRUCTURA DE DATOS - BENCHMARK FIBONACCI");
         System.out.println("  Universidad Da Vinci de Guatemala");
-        System.out.println("  Ing. Brandon Chitay");
         System.out.println("============================================================");
     }
 
