@@ -4,10 +4,13 @@ import algorithms.Fibonacci;
 import algorithms.BusquedaLineal;
 import algorithms.Factorial;
 import algorithms.OrdenamientoBurbuja;
+import utils.GeneradorDatos;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Random;
 
 /**
  * ============================================================
@@ -37,6 +40,7 @@ public class Main {
      *   fib(40) → ~2.7 mil millones de llamadas (tarda minutos)
      */
     private static final int[] TAMANOS = {5, 10, 15, 20, 25, 30};
+    private static final int[] ARRTAMANOS = {100, 500, 1000, 5000, 10000};
 
     /** Ruta del archivo de resultados */
     private static final String CSV_PATH = "resultados/tiempos.csv";
@@ -98,7 +102,7 @@ public class Main {
                     n, tIter, tRec, factor);
         }
         /////////////////////FACTORIAL/////////////////
-        //StringBuilder csv = new StringBuilder();
+        
         csv.append("Algoritmo,Version,n,Resultado,Tiempo_ms\n");
 
         // ---- Factorial ITERATIVO ----
@@ -119,7 +123,7 @@ public class Main {
         }
 
         // ---- FACTORIAL RECURSIVO ----
-        System.out.println("\n  FACTORIAL RECURSIVO  [O(2^n)]");
+        System.out.println("\n  FACTORIAL RECURSIVO  [O(n)]");
         Medidor.imprimirEncabezado();
 
         for (int n : TAMANOS) {
@@ -148,6 +152,113 @@ public class Main {
             System.out.printf("n=%-6d | %-14.6f | %-14.6f | %.1fx mas lento%n",
                     n, tIter, tRec, factor);
         }
+        /////////////////////BUSQUEDA LINEAL/////////////////
+       
+        csv.append("Algoritmo,Version,n,Resultado,Tiempo_ms\n");
+
+        // ---- Busqueda lineal ITERATIVO ----
+        System.out.println("\n  BUSQUEDA LINEAL ITERATIVO  [O(n)]");
+        Medidor.imprimirEncabezado();
+
+        for (int n : ARRTAMANOS) {
+            final int fn = n;
+            Random rand = new Random();
+            // Calcular resultado una vez (solo para mostrarlo)
+            long resultado = BusquedaLineal.iterativo(GeneradorDatos.generarArregloAleatorio(fn),rand.nextInt(fn));
+
+            // Medir solo el algoritmo puro (sin I/O ni inicialización)
+            double tiempoMs = Medidor.medir(() -> BusquedaLineal.iterativo(GeneradorDatos.generarArregloAleatorio(fn),rand.nextInt(fn)));
+
+            Medidor.imprimirFila("BUSQUEDA LINEAL", "Iterativo", n, tiempoMs);
+            csv.append(String.format("BUSQUEDA LINEAL,Iterativo,%d,%d,%.6f%n", n, resultado, tiempoMs));
+        }
+
+        // ---- BUSQUEDA LINEAL RECURSIVO ----
+        System.out.println("\n  BUSQUEDA LINEAL RECURSIVO  [O(n)]");
+        Medidor.imprimirEncabezado();
+
+        for (int n : ARRTAMANOS) {
+            final int fn = n;
+            Random rand = new Random();
+
+            long resultado = BusquedaLineal.recursivo(GeneradorDatos.generarArregloAleatorio(fn),rand.nextInt(fn),0);
+            double tiempoMs = Medidor.medir(() -> BusquedaLineal.recursivo(GeneradorDatos.generarArregloAleatorio(fn),rand.nextInt(fn),0));
+
+            Medidor.imprimirFila("BUSQUEDA LINEAL", "Recursivo", n, tiempoMs);
+            csv.append(String.format("BUSQUEDA LINEAL,Recursivo,%d,%d,%.6f%n", n, resultado, tiempoMs));
+        }
+
+        // ---- ANÁLISIS DE DIFERENCIA ----
+        System.out.println("\n  COMPARACION ITERATIVO vs RECURSIVO");
+        System.out.println("-".repeat(60));
+        System.out.printf("%-8s | %-14s | %-14s | %s%n",
+                "n", "Iterativo (ms)", "Recursivo (ms)", "Recursivo / Iterativo");
+        System.out.println("-".repeat(60));
+
+        for (int n : ARRTAMANOS) {
+            final int fn = n;
+            Random rand = new Random();
+            double tIter = Medidor.medir(() -> BusquedaLineal.iterativo(GeneradorDatos.generarArregloAleatorio(fn),rand.nextInt(fn)));
+            double tRec  = Medidor.medir(() -> BusquedaLineal.recursivo(GeneradorDatos.generarArregloAleatorio(fn),rand.nextInt(fn),0));
+            double factor = (tIter > 0) ? tRec / tIter : 0;
+
+            System.out.printf("n=%-6d | %-14.6f | %-14.6f | %.1fx mas lento%n",
+                    n, tIter, tRec, factor);
+        }
+        /////////////////////ORDENAMIENTO BURBUJA/////////////////
+       
+        csv.append("Algoritmo,Version,n,Resultado,Tiempo_ms\n");
+
+        // ---- Busqueda lineal ITERATIVO ----
+        System.out.println("\n  ORDENAMIENTO BURBUJA ITERATIVO  [O(n^2)]");
+        Medidor.imprimirEncabezado();
+
+        for (int n : ARRTAMANOS) {
+            final int fn = n;
+            int [] resultado=GeneradorDatos.generarArregloAleatorio(fn);
+            // Calcular resultado una vez (solo para mostrarlo)
+            OrdenamientoBurbuja.iterativo(resultado);
+
+            // Medir solo el algoritmo puro (sin I/O ni inicialización)
+            double tiempoMs = Medidor.medir(() -> OrdenamientoBurbuja.iterativo(GeneradorDatos.generarArregloAleatorio(fn)));
+
+            Medidor.imprimirFila("ORDENAMIENTO BURBUJA", "Iterativo", n, tiempoMs);
+            csv.append(String.format("ORDENAMIENTO BURBUJA,Iterativo,%d,%.6f%n", n, tiempoMs));
+        }
+
+        // ---- ORDENAMIENTO BURBUJA RECURSIVO ----
+        System.out.println("\n  ORDENAMIENTO BURBUJA RECURSIVO  [O(n^2)]");
+        Medidor.imprimirEncabezado();
+
+        for (int n : ARRTAMANOS) {
+            final int fn = n;
+            int [] resultado=GeneradorDatos.generarArregloAleatorio(fn);
+            OrdenamientoBurbuja.recursivo(resultado,fn);
+            double tiempoMs = Medidor.medir(() -> OrdenamientoBurbuja.recursivo(GeneradorDatos.generarArregloAleatorio(fn),fn));
+
+            Medidor.imprimirFila("ORDENAMIENTO BURBUJA", "Recursivo", n, tiempoMs);
+            csv.append(String.format("ORDENAMIENTO BURBUJA,Recursivo,%d,%.6f%n", n, tiempoMs));
+        }
+
+        // ---- ANÁLISIS DE DIFERENCIA ----
+        System.out.println("\n  COMPARACION ITERATIVO vs RECURSIVO");
+        System.out.println("-".repeat(60));
+        System.out.printf("%-8s | %-14s | %-14s | %s%n",
+                "n", "Iterativo (ms)", "Recursivo (ms)", "Recursivo / Iterativo");
+        System.out.println("-".repeat(60));
+
+        for (int n : ARRTAMANOS) {
+            final int fn = n;
+            
+            double tIter = Medidor.medir(() -> OrdenamientoBurbuja.iterativo(GeneradorDatos.generarArregloAleatorio(fn)));
+            double tRec  = Medidor.medir(() -> OrdenamientoBurbuja.recursivo(GeneradorDatos.generarArregloAleatorio(fn),fn));
+            double factor = (tIter > 0) ? tRec / tIter : 0;
+
+            System.out.printf("n=%-6d | %-14.6f | %-14.6f | %.1fx mas lento%n",
+                    n, tIter, tRec, factor);
+        }
+
+
 
         // ---- EXPORTAR CSV ----
         exportarCSV(csv.toString());

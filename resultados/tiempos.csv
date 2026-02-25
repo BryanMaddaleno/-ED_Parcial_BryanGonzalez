@@ -1,26 +1,48 @@
 Algoritmo,Version,n,Resultado,Tiempo_ms
-Fibonacci,Iterativo,5,5,0.000540
+Fibonacci,Iterativo,5,5,0.000530
 Fibonacci,Iterativo,10,55,0.000260
-Fibonacci,Iterativo,15,610,0.000290
-Fibonacci,Iterativo,20,6765,0.000340
-Fibonacci,Iterativo,25,75025,0.000370
-Fibonacci,Iterativo,30,832040,0.000610
-Fibonacci,Recursivo,5,5,0.001270
-Fibonacci,Recursivo,10,55,0.005840
-Fibonacci,Recursivo,15,610,0.008840
-Fibonacci,Recursivo,20,6765,0.054100
-Fibonacci,Recursivo,25,75025,0.317780
-Fibonacci,Recursivo,30,832040,3.530160
+Fibonacci,Iterativo,15,610,0.000280
+Fibonacci,Iterativo,20,6765,0.000330
+Fibonacci,Iterativo,25,75025,0.000380
+Fibonacci,Iterativo,30,832040,0.000570
+Fibonacci,Recursivo,5,5,0.000790
+Fibonacci,Recursivo,10,55,0.005900
+Fibonacci,Recursivo,15,610,0.008760
+Fibonacci,Recursivo,20,6765,0.028610
+Fibonacci,Recursivo,25,75025,0.316430
+Fibonacci,Recursivo,30,832040,3.547970
 Algoritmo,Version,n,Resultado,Tiempo_ms
-Factorial,Iterativo,5,120,0.000350
-Factorial,Iterativo,10,3628800,0.000230
-Factorial,Iterativo,15,1307674368000,0.000250
-Factorial,Iterativo,20,2432902008176640000,0.000310
-Factorial,Iterativo,25,7034535277573963776,0.000310
-Factorial,Iterativo,30,-8764578968847253504,0.000510
-Factorial,Recursivo,5,120,0.000380
-Factorial,Recursivo,10,3628800,0.000500
-Factorial,Recursivo,15,1307674368000,0.000840
-Factorial,Recursivo,20,2432902008176640000,0.000180
-Factorial,Recursivo,25,7034535277573963776,0.000170
-Factorial,Recursivo,30,-8764578968847253504,0.000160
+Factorial,Iterativo,5,120,0.000310
+Factorial,Iterativo,10,3628800,0.000220
+Factorial,Iterativo,15,1307674368000,0.000240
+Factorial,Iterativo,20,2432902008176640000,0.000260
+Factorial,Iterativo,25,7034535277573963776,0.000450
+Factorial,Iterativo,30,-8764578968847253504,0.000540
+Factorial,Recursivo,5,120,0.000390
+Factorial,Recursivo,10,3628800,0.000400
+Factorial,Recursivo,15,1307674368000,0.000890
+Factorial,Recursivo,20,2432902008176640000,0.000150
+Factorial,Recursivo,25,7034535277573963776,0.000160
+Factorial,Recursivo,30,-8764578968847253504,0.000180
+Algoritmo,Version,n,Resultado,Tiempo_ms
+BUSQUEDA LINEAL,Iterativo,100,-1,0.022230
+BUSQUEDA LINEAL,Iterativo,500,-1,0.025200
+BUSQUEDA LINEAL,Iterativo,1000,-1,0.041840
+BUSQUEDA LINEAL,Iterativo,5000,-1,0.180020
+BUSQUEDA LINEAL,Iterativo,10000,659,0.163590
+BUSQUEDA LINEAL,Recursivo,100,-1,0.006280
+BUSQUEDA LINEAL,Recursivo,500,-1,0.013500
+BUSQUEDA LINEAL,Recursivo,1000,-1,0.022590
+BUSQUEDA LINEAL,Recursivo,5000,-1,0.099230
+BUSQUEDA LINEAL,Recursivo,10000,3788,0.207160
+Algoritmo,Version,n,Resultado,Tiempo_ms
+ORDENAMIENTO BURBUJA,Iterativo,100,0.114790
+ORDENAMIENTO BURBUJA,Iterativo,500,0.507900
+ORDENAMIENTO BURBUJA,Iterativo,1000,0.770790
+ORDENAMIENTO BURBUJA,Iterativo,5000,19.848870
+ORDENAMIENTO BURBUJA,Iterativo,10000,98.540890
+ORDENAMIENTO BURBUJA,Recursivo,100,0.038370
+ORDENAMIENTO BURBUJA,Recursivo,500,0.345430
+ORDENAMIENTO BURBUJA,Recursivo,1000,0.638420
+ORDENAMIENTO BURBUJA,Recursivo,5000,15.959580
+ORDENAMIENTO BURBUJA,Recursivo,10000,78.767540
