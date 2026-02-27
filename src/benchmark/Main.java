@@ -9,7 +9,6 @@ import utils.GeneradorDatos;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -207,9 +206,9 @@ public class Main {
         }
         /////////////////////ORDENAMIENTO BURBUJA/////////////////
        
-        csv.append("Algoritmo,Version,n,Resultado,Tiempo_ms\n");
+        csv.append("Algoritmo,Version,n,Tiempo_ms\n");
 
-        // ---- Busqueda lineal ITERATIVO ----
+        // ---- ORDENAMIENTO BURBUJA ITERATIVO ----
         System.out.println("\n  ORDENAMIENTO BURBUJA ITERATIVO  [O(n^2)]");
         Medidor.imprimirEncabezado();
 
@@ -276,7 +275,7 @@ public class Main {
     // ----------------------------------------------------------------
     private static void imprimirBanner() {
         System.out.println("============================================================");
-        System.out.println("  ESTRUCTURA DE DATOS - BENCHMARK FIBONACCI");
+        System.out.println("  ESTRUCTURA DE DATOS");
         System.out.println("  Universidad Da Vinci de Guatemala");
         System.out.println("============================================================");
     }
